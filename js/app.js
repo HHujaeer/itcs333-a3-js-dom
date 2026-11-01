@@ -5,27 +5,20 @@
 
 // TODO: your code here
 
-const counterEl = document.getElementById("counter");
-const todoList = document.getElementById("todo-list");
-const todoForm = document.getElementById("todo-form");
-const errorEl = document.getElementById("error-msg");
-const allBtn = document.getElementById("filter-all");
-const activeBtn = document.getElementById("filter-active");
-const doneBtn = document.getElementById("filter-done");
+(function() {
+  const counterEl = document.getElementById("counter");
+  const todoList = document.getElementById("todo-list");
+  const todoForm = document.getElementById("todo-form");
+  const errorEl = document.getElementById("error-msg");
+  const allBtn = document.getElementById("filter-all");
+  const activeBtn = document.getElementById("filter-active");
+  const doneBtn = document.getElementById("filter-done");
 
-function updateCounter() {
-  const activeCount = todoList.querySelectorAll("li:not(.completed)").length;
-  counterEl.textContent = `${activeCount} items left`;
-}
+  function updateCounter() {
+    const activeCount = todoList.querySelectorAll("li:not(.completed)").length;
+    counterEl.textContent = `${activeCount} items left`;
+  }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", start);
-} else {
-  start();
-}
-
-
-function start() {
   todoForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const inputEl = document.getElementById("todo-input");
@@ -82,5 +75,4 @@ function start() {
       }
     })
   })
-
-}
+})();
