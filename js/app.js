@@ -57,15 +57,15 @@ function start() {
   })
 
   allBtn.addEventListener("click", function() {
-    todoList.childNodes.forEach((el) => el.classList.remove("hidden"))
+    todoList.childNodes.forEach((el) => el.style.removeProperty("display"))
   })
 
   activeBtn.addEventListener("click", function() {
     todoList.childNodes.forEach((el) => {
-      if (el.classList.contains("completed")) {
-        el.classList.add("hidden");
+      if (!el.classList.contains("completed")) {
+        el.style.removeProperty("display");
       } else {
-        el.classList.remove("hidden");
+        el.style.display = "none";
       }
     });
   });
@@ -73,9 +73,9 @@ function start() {
   doneBtn.addEventListener("click", function() {
     todoList.childNodes.forEach((el) => {
       if (el.classList.contains("completed")) {
-        el.classList.remove("hidden");
+        el.style.removeProperty("display");
       } else {
-        el.classList.add("hidden");
+        el.style.display = "none";
       }
     })
   })
