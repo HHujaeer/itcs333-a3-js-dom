@@ -14,6 +14,32 @@
   const activeBtn = document.getElementById("filter-active");
   const doneBtn = document.getElementById("filter-done");
 
+  allBtn.addEventListener("click", function() {
+    for (const el of todoList.children) {
+      el.style.removeProperty("display");
+    }
+  })
+
+  activeBtn.addEventListener("click", function() {
+    for (const el of todoList.children) {
+      if (!el.classList.contains("completed")) {
+        el.style.removeProperty("display");
+      } else {
+        el.style.display = "none";
+      }
+    }
+  });
+
+  doneBtn.addEventListener("click", function() {
+    for (const el of todoList.children) {
+      if (el.classList.contains("completed")) {
+        el.style.removeProperty("display");
+      } else {
+        el.style.display = "none";
+      }
+    }
+  });
+
   function updateCounter() {
     const activeCount = [...todoList.children].filter((el) => !el.classList.contains("completed")).length;
     counterEl.textContent = `${activeCount} items left`;
@@ -50,29 +76,5 @@
       e.target.parentNode.remove();
     }
     updateCounter()
-  })
-
-  allBtn.addEventListener("click", function() {
-    todoList.childNodes.forEach((el) => el.style.removeProperty("display"))
-  })
-
-  activeBtn.addEventListener("click", function() {
-    todoList.childNodes.forEach((el) => {
-      if (!el.classList.contains("completed")) {
-        el.style.removeProperty("display");
-      } else {
-        el.style.display = "none";
-      }
-    });
-  });
-
-  doneBtn.addEventListener("click", function() {
-    todoList.childNodes.forEach((el) => {
-      if (el.classList.contains("completed")) {
-        el.style.removeProperty("display");
-      } else {
-        el.style.display = "none";
-      }
-    })
   })
 })();
