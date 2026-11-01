@@ -45,15 +45,19 @@ function start() {
   })
 
   todoList.addEventListener("click", function(e) {
-    if (e.target.tagName.toLowerCase() == "li") {
-      e.target.classList.toggle("completed");
-    } else if (e.target.classList.contains("item-text")) {
-      e.target.parentNode.classList.toggle("completed");
+    if (e.target.classList.contains("item-text")) {
+      if (e.target.parentNode.classList.contains("completed")) {
+        counter++;
+        e.target.parentNode.classList.remove("completed");
+      } else {
+        e.target.parentNode.classList.add("completed");
+        counter--;
+      }
     } else if (e.target.classList.contains("delete-btn")) {
       e.target.parentNode.remove();
       counter--;
-      counterEl.textContent = `${counter} items left`;
     }
+    counterEl.textContent = `${counter} items left`;
   })
 
   allBtn.addEventListener("click", function() {
