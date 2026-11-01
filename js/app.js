@@ -15,7 +15,7 @@
   const doneBtn = document.getElementById("filter-done");
 
   function updateCounter() {
-    const activeCount = todoList.querySelectorAll("li:not(.completed)").length;
+    const activeCount = [...todoList.children].filter((el) => !el.classList.contains("completed")).length;
     counterEl.textContent = `${activeCount} items left`;
   }
 
