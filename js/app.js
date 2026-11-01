@@ -18,14 +18,54 @@ function start() {
   const todoList = document.getElementById("todo-list");
   const todoForm = document.getElementById("todo-form");
   const counterEl = document.getElementById("counter");
+  const errorEl = document.getElementById("error-msg");
+  const allBtn = document.getElementById("filter-all");
+  const activeBtn = document.getElementById("filter-active");
+  const doneBtn = document.getElementById("filter-done");
+
   todoForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const inputEl = document.getElementById("todo-input");
     const task = inputEl.value;
     inputEl.value = "";
     if (task != "") {
+      errorEl.classList.add("hidden");
       counter++;
+      counterEl.textContent = `${counter} items left`;
+      const taskEl = document.createElement("li");
+      taskEl.innerHTML = `<span class="item-text">${task}</span>`
+      const buttonEl = document.createElement("button");
+      buttonEl.textContent = "Delete"
+      buttonEl.classList.add("delete-btn")
+      taskEl.appendChild(buttonEl)
+      todoList.append(taskEl)
+    } else {
+      errorEl.classList.remove("hidden");
+    }
+  })
+
+  todoList.addEventListener("click", function(e) {
+    if (e.target.tagName.toLowerCase() == "li") {
+      e.target.classList.toggle("completed");
+    } else if (e.target.classList.contains("item-text")) {
+      e.target.parentNode.classList.toggle("completed");
+    } else if (e.target.classList.contains("delete-btn")) {
+      e.target.parentNode.remove();
+      counter--;
       counterEl.textContent = `${counter} items left`;
     }
   })
+
+  allBtn.addEventListener("click", function(e) {
+    console.log(e.target)
+  })
+
+  activeBtn.addEventListener("click", function(e) {
+    console.log(e.target)
+  })
+
+  doneBtn.addEventListener("click", function(e) {
+    console.log(e.target)
+  })
+
 }
