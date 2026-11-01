@@ -26,7 +26,7 @@ function start() {
   todoForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const inputEl = document.getElementById("todo-input");
-    const task = inputEl.value;
+    const task = inputEl.value.trim();
     inputEl.value = "";
     if (task != "") {
       errorEl.classList.add("hidden");
