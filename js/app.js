@@ -56,16 +56,28 @@ function start() {
     }
   })
 
-  allBtn.addEventListener("click", function(e) {
-    console.log(e.target)
+  allBtn.addEventListener("click", function() {
+    todoList.childNodes.forEach((el) => el.classList.remove("hidden"))
   })
 
-  activeBtn.addEventListener("click", function(e) {
-    console.log(e.target)
-  })
+  activeBtn.addEventListener("click", function() {
+    todoList.childNodes.forEach((el) => {
+      if (el.classList.contains("completed")) {
+        el.classList.add("hidden");
+      } else {
+        el.classList.remove("hidden");
+      }
+    });
+  });
 
-  doneBtn.addEventListener("click", function(e) {
-    console.log(e.target)
+  doneBtn.addEventListener("click", function() {
+    todoList.childNodes.forEach((el) => {
+      if (el.classList.contains("completed")) {
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    })
   })
 
 }
