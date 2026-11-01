@@ -5,7 +5,18 @@
 
 // TODO: your code here
 
-let counter = 0;
+const counterEl = document.getElementById("counter");
+const todoList = document.getElementById("todo-list");
+const todoForm = document.getElementById("todo-form");
+const errorEl = document.getElementById("error-msg");
+const allBtn = document.getElementById("filter-all");
+const activeBtn = document.getElementById("filter-active");
+const doneBtn = document.getElementById("filter-done");
+
+function updateCounter() {
+  const activeCount = todoList.querySelectorAll("li:not(.completed)").length;
+  counterEl.textContent = `${activeCount} items left`;
+}
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", start);
@@ -15,14 +26,6 @@ if (document.readyState === "loading") {
 
 
 function start() {
-  const todoList = document.getElementById("todo-list");
-  const todoForm = document.getElementById("todo-form");
-  const counterEl = document.getElementById("counter");
-  const errorEl = document.getElementById("error-msg");
-  const allBtn = document.getElementById("filter-all");
-  const activeBtn = document.getElementById("filter-active");
-  const doneBtn = document.getElementById("filter-done");
-
   todoForm.addEventListener("submit", function(e) {
     e.preventDefault();
     const inputEl = document.getElementById("todo-input");
@@ -30,8 +33,6 @@ function start() {
     inputEl.value = "";
     if (task != "") {
       errorEl.classList.add("hidden");
-      counter++;
-      counterEl.textContent = `${counter} items left`;
       const taskEl = document.createElement("li");
       taskEl.innerHTML = `<span class="item-text">${task}</span>`
       const buttonEl = document.createElement("button");
@@ -39,6 +40,7 @@ function start() {
       buttonEl.classList.add("delete-btn")
       taskEl.appendChild(buttonEl)
       todoList.append(taskEl)
+      updateCounter()
     } else {
       errorEl.classList.remove("hidden");
     }
@@ -47,17 +49,14 @@ function start() {
   todoList.addEventListener("click", function(e) {
     if (e.target.classList.contains("item-text")) {
       if (e.target.parentNode.classList.contains("completed")) {
-        counter++;
         e.target.parentNode.classList.remove("completed");
       } else {
         e.target.parentNode.classList.add("completed");
-        counter--;
       }
     } else if (e.target.classList.contains("delete-btn")) {
       e.target.parentNode.remove();
-      counter--;
     }
-    counterEl.textContent = `${counter} items left`;
+    updateCounter()
   })
 
   allBtn.addEventListener("click", function() {
